@@ -1,0 +1,168 @@
+﻿@model GEST.Models.Projects
+
+@{
+    ViewData["Title"] = "Projekty - Edytowanie";
+}
+<div class="box">
+    <h2>Projekty</h2>
+    
+    <p>Edytowanie<p />
+    <div class="line"></div>
+    <form asp-action="Edit" class="formWithFile articleForm" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <!--Czy wyświetlać na głównej-->
+        <div class="form-group">
+            <input asp-for="DisplayOnHomePage" name="DisplayOnHomePage" type="checkbox" />
+            <label for="DisplayOnHomePage">Wyświetlaj na głownej stronie</label>
+        </div>
+        <!--Tytuł-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="Title" class="control-label"><img class="language-icon" src="~/img/poland.png" />Tytuł</label>
+                <textarea asp-for="Title" class="form-control auto-size-textarea" rows="1">@Html.DisplayFor(x => x.Title)</textarea>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="Title_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Tytuł
+                    <span data-target="Title_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea lang="en" asp-for="Title_en" class="form-control  auto-size-textarea" rows="1">@Html.DisplayFor(x => x.Title_en)</textarea>
+                <span asp-validation-for="Title_en" class="text-danger"></span>
+            </div>
+        </div>
+        <!--Krótki opis-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="ShortDescription" class="control-label"><img class="language-icon" src="~/img/poland.png" />Krótki opis</label>
+                <textarea asp-for="ShortDescription" class="form-control auto-size-textarea" rows="1">@Html.DisplayFor(x => x.ShortDescription)</textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="ShortDescription_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Krótki opis
+                    <span data-target="ShortDescription_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea lang="en" asp-for="ShortDescription_en" class="form-control  auto-size-textarea" rows="1">@Html.DisplayFor(x => x.ShortDescription_en)</textarea>
+                <span asp-validation-for="ShortDescription_en" class="text-danger"></span>
+            </div>
+        </div>
+        <!--Treść-->
+        <div class="form-group">
+            <label class="control-label"><img class="language-icon" src="~/img/poland.png" />Treść</label>
+            <textarea name="Description" class="form-control editme tiny-edit" rows="10" id="Description">@Html.DisplayFor(x => x.Description)</textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+            <label class="control-label"><img class="language-icon" src="~/img/united-kingdom.png" />Treść<span class="translate-trigger">(Tłumacz automatycznie)</span></label>
+            <textarea name="Description_en" class="form-control editme tiny-edit" rows="10" id="Description_en">@Html.DisplayFor(x => x.Description_en)</textarea>
+            <span asp-validation-for="Description_en" class="text-danger"></span>
+        </div>
+        <!--zdjecia dodawanie-->
+        <div class="form-group">
+            <label for="formPhoto">Dodaj zdjęcia:</label>
+            <input name="photos" type="file" class="form-control" id="formPhoto" multiple>
+            <span class="text-danger photosValidationMassage">@Html.ValidationMessage("photoExtError")</span>
+        </div>
+        <!--pliki dodawanie-->
+        <div class="form-group">
+            <label for="formFile">Dodaj pliki:</label>
+            <input name="files" type="file" class="form-control" id="formFile" multiple>
+            <span class="text-danger filesValidationMassage">@Html.ValidationMessage("fileExtError")</span>
+        </div>
+        <!--zdjecia usuwanie-->
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Usuń dodane wcześniej zdjęcia
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne">
+                    <div class="accordion-body">
+
+                            @if (Model.Photos != null && Model.Photos.Any())
+                            {
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+                                    @foreach (var item in Model.Photos)
+                                    {
+                                    <div class="col">
+                                        <div class="gallery-item photo" style="background-image: url(@Url.Content(item.PhotoPath));">
+                                            <div class="gallery-overlay">
+                                                <label for="photo.@item.Id"><span class="delete-photo-icon material-symbols-outlined">delete</span></label>
+                                                <input id="photo.@item.Id" type="checkbox" data-id="@item.Id" class="removePhoto" hidden />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                            </div>
+                            }
+                            else
+                            {
+                            <p style="margin: 0;">Brak zdjęć</p>
+                            }
+                        <input type="hidden" id="selectedPhotosIds" name="selectedPhotosIds" />
+
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Usuń dodane wcześniej pliki
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo">
+                    <div class="accordion-body">
+                            
+                        @if (Model.Files != null && Model.Files.Any())
+                        {
+                            @foreach (var item in Model.Files)
+                            {
+                            <div class="d-flex align-items-center">
+                                <label for="file.@item.Id"><span class="delete-file-icon material-symbols-outlined">delete</span></label>
+                                <input id="file.@item.Id" type="checkbox" data-id="@item.Id" class="removeFile" hidden />
+                                <a href="@Url.Content(item.FilePath)" target="_blank">@item.FileName</a>
+                            </div>
+                            }
+                        }
+                        else
+                        {
+                            <p style="margin: 0;">Brak plików</p>
+                        }
+                        <input type="hidden" id="selectedFilesIds" name="selectedFilesIds" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="line"></div>
+        <div class="form-group">
+            <input type="submit" value="Zapisz" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $('form').submit(function () {
+            var selectedPhotosIds = [];
+            $('.removePhoto:checked').each(function () {
+                selectedPhotosIds.push($(this).data('id'));
+            });
+            $('#selectedPhotosIds').val(selectedPhotosIds.join(','));
+
+            var selectedFilesIds = [];
+            $('.removeFile:checked').each(function () {
+                selectedFilesIds.push($(this).data('id'));
+            });
+            $('#selectedFilesIds').val(selectedFilesIds.join(','));
+        });
+    </script>
+
+}

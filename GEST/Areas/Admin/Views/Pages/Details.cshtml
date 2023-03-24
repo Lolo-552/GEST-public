@@ -1,0 +1,21 @@
+﻿@model GEST.Models.Pages
+
+@{
+    ViewData["Title"] = "Zakładka więcej - Szczegóły";
+}
+
+<div class="box">
+    <h2>Zakładka więcej</h2>
+    <p>Szczegóły</p>
+    <div class="line"></div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj</a>
+    <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+</div>
+
+<div class="iframe-content">
+    <iframe class="auto-height-iframe" src="@Url.Action("Details", "Pages", new {area="", id = Model.Id })" width="100%"></iframe>
+</div>
+<script>
+
+
+</script>

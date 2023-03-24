@@ -1,0 +1,97 @@
+﻿@model GEST.Models.Projects
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<div class="box">
+    <h2>Projekty</h2>
+
+    <p>Dodawanie</p>
+    <div class="line"></div>
+
+    <form class="articleForm formWithFile" asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <!--Data publikacji
+        <div class="form-group">
+            <label>Data Publikacji</label>
+            <input name="DatePublished" type="date" value="DateTime.Now.ToString("yyyy-MM-dd")"/>
+        </div>-->
+        <!--Czy wyświetlać na głównej-->
+        <div class="form-group">
+
+            <input asp-for="DisplayOnHomePage" name="DisplayOnHomePage" type="checkbox" />
+            <label for="DisplayOnHomePage">Wyświetlaj na głownej stronie</label>
+        </div>
+        <!--Tytuł-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="Title" class="control-label"><img class="language-icon" src="~/img/poland.png" />Tytuł</label>
+                <textarea asp-for="Title" class="form-control auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="Title_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Tytuł
+                    <span data-target="Title_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea lang="en" asp-for="Title_en" class="form-control  auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Title_en" class="text-danger"></span>
+            </div>
+        </div>
+        <!--Krótki opis-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="ShortDescription" class="control-label"><img class="language-icon" src="~/img/poland.png" />Krótki opis</label>
+                <textarea asp-for="ShortDescription" class="form-control auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="ShortDescription" class="text-danger"></span>
+
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="ShortDescription_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Krótki opis
+                    <span data-target="ShortDescription_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea lang="en" asp-for="ShortDescription_en" class="form-control  auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="ShortDescription_en" class="text-danger"></span>
+            </div>
+        </div>
+        <!--Treść-->
+        <div class="form-group">
+            <label class="control-label"><img class="language-icon" src="~/img/poland.png" />Treść</label>
+            <textarea name="Description" class="form-control editme" rows="10" id="Description"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+
+            <label class="control-label"><img class="language-icon" src="~/img/united-kingdom.png" />Treść<span class="translate-trigger">(Tłumacz automatycznie)</span></label>
+            <textarea name="Description_en" class="form-control editme" rows="10" id="Description_en"></textarea>
+            <span asp-validation-for="Description_en" class="text-danger"></span>
+        </div>
+
+
+        <div class="form-group">
+            <label>Dodaj zdjęcia:</label>
+            <input name="photos" type="file" class="form-control" id="formFile" multiple>
+            <span class="text-danger photosValidationMassage">@Html.ValidationMessage("photoExtError")</span>
+        </div>
+        <div class="form-group">
+            <label>Dodaj pliki:</label>
+            <input name="files" type="file" class="form-control" id="formFile" multiple>
+            <span class="text-danger filesValidationMassage">@Html.ValidationMessage("fileExtError")</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="form-group">
+            <input type="submit" value="Dodaj" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+        </div>
+    </form>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

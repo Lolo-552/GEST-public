@@ -1,0 +1,46 @@
+﻿@model GEST.Models.Management
+
+@{
+    ViewData["Title"] = "Zarząd - Szczegóły";
+}
+
+<div class="box">
+    <h2>Zarząd</h2>
+
+    <p>Szczegóły</p>
+    <div class="line"></div>
+    <dl>
+        <dt class="col-sm-2">
+            Imię
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Nazwisko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SureName)
+        </dd>
+        <dt class="col-sm-2">
+            Stanowsiko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Opis
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    <div class="line"></div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj</a>
+        <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+    </div>
+</div>
+

@@ -1,0 +1,88 @@
+﻿<!--https://codepen.io/sreisner/pen/yOOOjx
+    magnific-popup gallery
+
+-->
+@model GEST.ViewModels.HomePageModel
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GEST</title>
+    
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <link rel="stylesheet" href="~/css/lightbox.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GEST.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
+    
+</head>
+<body>
+    <header class="header">
+        <nav class="content-wrapper">
+            <a asp-controller="Home" asp-action="Index"><img src="~/img/gestLogo.png" alt="" class="logo" style="width: 130px" /></a>       
+            <ul class="menu">
+                <li class="menuItem">
+                    <a href="@Url.Action("Index", "Home")" class="nav-link nav-link-ltr project-link">@((string)ViewBag.lang == "pl" ? "strona główna" : "Home")</a>
+                </li>
+                <li class="menuItem">
+                    <a href="@Url.Action("Index", "Projects")" class="nav-link nav-link-ltr project-link">@Html.DisplayFor(item => item.HomePage.ProjectHeader)</a>
+                </li>
+                <li class="menuItem">
+                    <a href="@Url.Action("Index", "News")" class="nav-link nav-link-ltr">@Html.DisplayFor(item => item.HomePage.NewsHeader)</a>
+                </li>
+                <li class="menuItem">
+                    <a href="@Url.Action("Index", "Achievements")" class="nav-link nav-link-ltr">@Html.DisplayFor(item => item.HomePage.AchievementsHeader)</a>
+                </li>
+                <li class="menuItem">
+                    <a href="@Url.Action("Index", "Publications")" class="nav-link nav-link-ltr">@Html.DisplayFor(item => item.HomePage.PublicationsHeader)</a>
+                </li>
+                <li class="menuItem">
+                    <a href="#" class="nav-link nav-link-ltr" id="dropdown">
+                        @((string)ViewBag.lang == "pl" ? "Więcej" : "More")
+                        <span class="material-symbols-outlined symbol-rotate" id="rotate-arrow" style="font-size: 21px;">expand_more</span>
+                    </a>
+                    
+                    <div class="dropdown-box">
+                        @foreach (var item in Model.Pages)
+                        {
+                            <a class="dropdown-link" href="@Url.Action("Details", "Pages",new { id = item.Id })">@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(loopitem => item.Title) : @Html.DisplayFor(loopitem => item.Title_en))</a>
+                        }
+                    </div>
+                </li>
+                <li class="menuItem" id="language-selector">
+                    <a href="@Url.Action("SetLanguage", "Home", new { lang = "pl" })" class="nav-link nav-link-ltr nav-link-language">PL</a>
+                    /
+                    <a href="@Url.Action("SetLanguage", "Home", new { lang = "en" })" class="nav-link nav-link-ltr nav-link-language">ENG</a>
+                </li>
+
+            </ul>
+
+            <button class="burger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </button>
+
+        </nav>
+    </header>
+        <main role="main">
+            @RenderBody()
+        </main>
+
+
+    <footer>
+        <p>@((string)ViewBag.lang == "pl" ? "Wykonanie" : "Created by"): Karol Wierzbiński</p>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!--<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>-->
+    <script src="~/js/lightbox.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

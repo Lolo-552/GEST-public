@@ -1,0 +1,18 @@
+﻿@model GEST.Areas.Admin.Models.Admin
+@{
+    Layout = "../Shared/_LayoutBlank.cshtml";
+}
+<form asp-area="Admin" asp-action="Login" method="post" class="form-signin">
+    <img class="mb-4" src="~/img/gestLogo.png" alt="" width="130">
+    <h1 class="h3 mb-3 font-weight-normal">Panel Administratora</h1>
+    <label asp-for="Login" for="inputLogin">Login</label>
+    <input asp-for="Login" id="inputLogin" class="form-control" placeholder="Email address" required="" autofocus="">
+    <label asp-for="Password" for="inputPassword">Hasło</label>
+    <input asp-for="Password"  type="password" id="inputPassword" class="form-control" placeholder="Hasło" required="">
+    @if (ViewData["LoginFlag"] != null)
+    {
+            <p class="text-danger">@ViewData["LoginFlag"]</p>
+    }
+    <a class="d-block mb-3" asp-controller="Login" asp-action="ResetPassword" asp-area="Admin">Przypomnij hasło</a>
+    <button class="btn btn btn-primary btn-block" type="submit">Zaloguj</button>
+</form>

@@ -1,0 +1,64 @@
+﻿@model GEST.ViewModels.HomePageModel
+
+@{
+    ViewData["Title"] = "Publikacje";
+}
+
+<div class="content-wrapper">
+    <h1 class="section-header-left">@Html.DisplayFor(model => model.HomePage.PublicationsHeader)</h1>
+    <div>
+        @foreach (var item in Model.Publications)
+        {
+            <div class="publication-card">
+                <span class=" circle-icon material-symbols-outlined">
+                    article
+                </span>
+                <div>
+                    <p class="publication-header">@Html.DisplayFor(loopitem => item.Authors)</p>
+                    <p>@Html.DisplayFor(loopitem => item.Name)</p>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    @if (ViewBag.PageCount > 1)
+    {
+        <div class="pagination">
+            @if (ViewBag.PageNumber > 1)
+            {
+                <a href="?page=@(ViewBag.PageNumber - 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_left
+                    </span>
+                </a>
+            }
+
+            @for (int i = Math.Max(1, ViewBag.PageNumber - 2); i <= Math.Min(ViewBag.PageCount, ViewBag.PageNumber + 2); i++)
+            {
+                if (i == ViewBag.PageNumber)
+                {
+                    <span class="pagination-item pagination-item-selected">@i</span>
+                }
+                else
+                {
+                    <a href="?page=@i" class="pagination-item">@i</a>
+                }
+            }
+            <p>z</p>
+            <span class="pagination-item pagination-item-count">@ViewBag.PageCount</span>
+
+            @if (ViewBag.PageNumber < ViewBag.PageCount)
+            {
+                <a href="?page=@(ViewBag.PageNumber + 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                </a>
+            }
+        </div>
+    }
+
+
+
+</div>

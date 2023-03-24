@@ -1,0 +1,54 @@
+﻿@model IEnumerable<GEST.Models.Publications>
+
+@{
+    ViewData["Title"] = "Publikacje";
+}
+<div class="box">
+
+
+    <h2>Publikacje</h2>
+
+    <a asp-action="Create" class="btn btn-success">Dodaj</a>
+
+    <div class="line"></div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Data utworzenia
+                </th>
+                <th>
+                    Autorzy
+                </th>
+                <th>
+                    Nazwa
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.DateAdded.ToString("dd.MM.yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Authors)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <div class="button-box d-flex justify-content-end" style="gap: 5px;">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-secondary action-btn"><span class="material-symbols-outlined">read_more</span></a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-dark action-btn"><span class="material-symbols-outlined">edit</span></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger action-btn"><span class="material-symbols-outlined">delete</span></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

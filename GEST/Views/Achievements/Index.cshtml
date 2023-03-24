@@ -1,0 +1,65 @@
+﻿@model GEST.ViewModels.HomePageModel
+
+@{
+    ViewData["Title"] = "Osiągniecia";
+}
+
+<div class="content-wrapper">
+    <h1 class="section-header-left">@Html.DisplayFor(model => model.HomePage.AchievementsHeader)</h1>
+    <div>
+        @foreach (var item in Model.Achievements)
+        {
+            <a asp-controller="Achievements" asp-action="Details" asp-route-id="@item.Id">
+                <div class="publication-card pb-card-hover">
+                    <span class="circle-icon material-symbols-outlined">military_tech</span>
+                    <div>
+                        <p class="publication-header">
+                            @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Title) : @Html.DisplayFor(modelItem => item.Title_en))
+                        </p>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+
+
+    @if (ViewBag.PageCount > 1)
+    {
+        <div class="pagination">
+            @if (ViewBag.PageNumber > 1)
+            {
+                <a href="?page=@(ViewBag.PageNumber - 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_left
+                    </span>
+                </a>
+            }
+
+            @for (int i = Math.Max(1, ViewBag.PageNumber - 2); i <= Math.Min(ViewBag.PageCount, ViewBag.PageNumber + 2); i++)
+            {
+                if (i == ViewBag.PageNumber)
+                {
+                    <span class="pagination-item pagination-item-selected">@i</span>
+                }
+                else
+                {
+                    <a href="?page=@i" class="pagination-item">@i</a>
+                }
+            }
+            <p>z</p>
+            <span class="pagination-item pagination-item-count">@ViewBag.PageCount</span>
+
+            @if (ViewBag.PageNumber < ViewBag.PageCount)
+            {
+                <a href="?page=@(ViewBag.PageNumber + 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                </a>
+            }
+        </div>
+    }
+
+
+
+</div>

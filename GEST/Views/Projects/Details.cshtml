@@ -1,0 +1,50 @@
+﻿@model GEST.ViewModels.HomePageModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="details content-wrapper">
+    
+    <p class="">
+        <a asp-controller="Home" asp-action="Index">GEST</a> <i class="material-symbols-outlined" style="position: relative; bottom: -6px;">keyboard_arrow_right</i><a asp-controller="Projects" asp-action="Index" style="font-weight: 700">@Html.DisplayFor(model => model.HomePage.ProjectHeader)</a>
+    </p>
+    <!--<p class="details-date">2022-07-5</p>-->
+    <h1>@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(model => model.Project.Title) : @Html.DisplayFor(model => model.Project.Title_en))</h1>
+    <div class="tinymce-content">
+        @(ViewBag.lang == "pl" ? Html.Raw(Model.Project.Description) : Html.Raw(Model.Project.Description_en))
+        
+    </div>
+   
+    <!--Pliki-->
+    @if (Model.Project.Files != null && Model.Project.Files.Any())
+    {
+        <h2>@(ViewBag.lang == "pl" ? "Pliki" : "Files")</h2>
+
+        <ul class="file-list">
+            @foreach (var item in Model.Project.Files)
+            {
+                <li class="file-list-item">
+                    <a href="@Url.Content(item.FilePath)" target="_blank">@Html.DisplayFor(model => item.FileName)</a>
+                </li>
+            }
+        </ul>
+    }
+
+    <!--Galeria-->
+    @if (Model.Project.Photos != null && Model.Project.Photos.Any())
+    {
+        <h2>@(ViewBag.lang == "pl" ? "Galeria" : "Gallery")</h2>
+        <div class="gallery">
+
+            @foreach (var item in Model.Project.Photos)
+            {
+                <div class="image">
+                    <a href="@Url.Content(item.PhotoPath)" class="gallery-item">
+                        <img src="@Url.Content(item.PhotoPath)" alt="" />
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+</div>

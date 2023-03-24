@@ -1,0 +1,51 @@
+﻿@model GEST.ViewModels.HomePageModel
+
+@{
+    ViewData["Title"] = "Osiągniecia";
+}
+<div class="details content-wrapper">
+    
+    <p class="">
+        <a asp-controller="Home" asp-action="Index">GEST</a> <i class="material-symbols-outlined" style="position: relative; bottom: -6px;">keyboard_arrow_right</i><a asp-controller="Achievements" asp-action="Index" style="font-weight: 700">@Html.DisplayFor(model => model.HomePage.AchievementsHeader)</a>
+    </p>
+    <!--<p class="details-date">2022-07-5</p>-->
+    
+    <h1>@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(model => model.Achievement.Title) : @Html.DisplayFor(model => model.Achievement.Title_en))</h1>
+    <p class="article-date">@Model.Achievement.DatePublished.ToString("dd.MM.yyyy")</p>
+    <div class="tinymce-content">
+        @(ViewBag.lang == "pl" ? Html.Raw(Model.Achievement.Description) : Html.Raw(Model.Achievement.Description_en))
+    </div>
+   
+    <!--Pliki-->
+    @if (Model.Achievement.Files != null && Model.Achievement.Files.Any())
+    {
+        <h2>@(ViewBag.lang == "pl" ? "Pliki" : "Files")</h2>
+
+        <ul class="file-list">
+            @foreach (var item in Model.Achievement.Files)
+            {
+                <li class="file-list-item">
+                    <a href="@Url.Content(item.FilePath)" target="_blank">@Html.DisplayFor(model => item.FileName)</a>
+                </li>
+            }
+        </ul>
+    }
+
+    <!--Galeria-->
+    @if (Model.Achievement.Photos != null && Model.Achievement.Photos.Any())
+    {
+        <h2>@(ViewBag.lang == "pl" ? "Galeria" : "Gallery")</h2>
+        <div class="gallery">
+
+            @foreach (var item in Model.Achievement.Photos)
+            {
+                <div class="image">
+                    <a href="@Url.Content(item.PhotoPath)" class="gallery-item">
+                        <img src="@Url.Content(item.PhotoPath)" alt="" />
+                    </a>
+                </div>
+            }
+        </div>
+    }
+
+</div>

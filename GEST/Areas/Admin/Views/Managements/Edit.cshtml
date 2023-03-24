@@ -1,0 +1,90 @@
+﻿@model GEST.Models.Management
+
+@{
+    ViewData["Title"] = "Zarząd - Edytowanie";
+}
+
+<div class="box">
+    <h2>Aktualności</h2>
+
+    <p>Edytowanie</p>
+    <div class="line"></div>
+
+    <form asp-action="Create" class="management-form">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Name" class="control-label">Imie</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="SureName" class="control-label">Nazwisko</label>
+                <input asp-for="SureName" class="form-control" />
+                <span asp-validation-for="SureName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label asp-for="Phone" class="control-label">Telefon <small>(Format +48 123123123)</small></label>
+                <input asp-for="Phone" class="form-control"/>
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Email" class="control-label">Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <!--Stanowsiko-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="Title" class="control-label"><img class="language-icon" src="~/img/poland.png" />Stanowisko</label>
+                <textarea asp-for="Title" class="form-control auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Title" class="text-danger"></span>
+
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="Title_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Stanowsiko
+                    <span data-target="Title_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea asp-for="Title_en" class="form-control auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Title_en" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!--Opis-->
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <label asp-for="Description" class="control-label"><img class="language-icon" src="~/img/poland.png" />Opis</label>
+                <textarea asp-for="Description" class="form-control auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+
+            </div>
+            <div class="col-lg-6">
+                <label asp-for="Description_en" class="control-label">
+                    <img class="language-icon" src="~/img/united-kingdom.png" />Opis
+                    <span data-target="Description_en" class="translate-label">(Tłumacz automatycznie)</span>
+                </label>
+                <textarea lang="en" asp-for="Description_en" class="form-control  auto-size-textarea" rows="1"></textarea>
+                <span asp-validation-for="Description_en" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="form-group">
+            <input type="submit" value="Dodaj" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

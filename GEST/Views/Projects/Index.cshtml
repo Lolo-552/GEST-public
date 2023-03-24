@@ -1,0 +1,68 @@
+﻿@model GEST.ViewModels.HomePageModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="content-wrapper">
+    <h1 class="section-header-left">@Html.DisplayFor(model => model.HomePage.ProjectHeader)</h1>
+    <div id="projectList">
+        @foreach (var item in Model.Projects)
+        {
+
+            <a asp-controller="Projects" asp-action="Details" asp-route-id="@item.Id" class="card-flex col col-md-6">
+                <div class="card">
+                    <h2>
+                        @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Title) : @Html.DisplayFor(modelItem => item.Title_en))
+                    </h2>
+                    <p>
+                        @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.ShortDescription) : @Html.DisplayFor(modelItem => item.ShortDescription_en))
+
+                    </p>
+                    <p class="more-icon"><span class="material-symbols-outlined">read_more</span></p>
+                </div>
+            </a>
+        }
+    </div>
+
+
+    @if (ViewBag.PageCount > 1)
+    {
+        <div class="pagination">
+            @if (ViewBag.PageNumber > 1)
+            {
+                <a href="?page=@(ViewBag.PageNumber - 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_left
+                    </span>
+                </a>
+            }
+
+            @for (int i = Math.Max(1, ViewBag.PageNumber - 2); i <= Math.Min(ViewBag.PageCount, ViewBag.PageNumber + 2); i++)
+            {
+                if (i == ViewBag.PageNumber)
+                {
+                    <span class="pagination-item pagination-item-selected">@i</span>
+                }
+                else
+                {
+                    <a href="?page=@i" class="pagination-item">@i</a>
+                }
+            }
+            <p>z</p>
+            <span class="pagination-item pagination-item-count">@ViewBag.PageCount</span>
+
+            @if (ViewBag.PageNumber < ViewBag.PageCount)
+            {
+                <a href="?page=@(ViewBag.PageNumber + 1)" class="pagination-item">
+                    <span class="material-symbols-outlined">
+                        chevron_right
+                    </span>
+                </a>
+            }
+        </div>
+    }
+
+
+
+</div>

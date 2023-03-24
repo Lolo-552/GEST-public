@@ -1,0 +1,21 @@
+﻿@model GEST.Models.Projects
+
+@{
+    ViewData["Title"] = "Projekty - Szczegóły";
+}
+
+<div class="box">
+    <h2>Projekty</h2>
+    <p>Szczegóły</p>
+    <div class="line"></div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj</a>
+    <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+</div>
+
+<div class="iframe-content">
+    <iframe class="auto-height-iframe" src="@Url.Action("Details", "Projects", new {area="", id = Model.Id })" width="100%"></iframe>
+</div>
+<script>
+
+
+</script>

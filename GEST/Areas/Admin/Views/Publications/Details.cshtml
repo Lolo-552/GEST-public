@@ -1,0 +1,27 @@
+﻿@model GEST.Models.Publications
+
+@{
+    ViewData["Title"] = "Publikacje - Szczegóły";
+}
+
+<div class="box">
+    <h2>Publikacje</h2>
+
+    <p>Szczegóły</p>
+    <div class="line"></div>
+    <dl>
+        <dt>Data dodania</dt>
+        <dd><p>@Model.DateAdded.ToString("dd.MM.yyyy")</p></dd>
+        <dt>Autorzy</dt>
+        <dd><p>@Html.DisplayFor(model => model.Authors)</p></dd>
+        <dt>Nazwa</dt>
+        <dd><p>@Html.DisplayFor(model => model.Name)</p></dd>
+    </dl>
+
+    <div class="line"></div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edytuj</a>
+        <a asp-action="Index" class="btn btn-outline-dark back-button">Wstecz</a>
+    </div>
+</div>

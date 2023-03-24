@@ -1,0 +1,26 @@
+﻿@model GEST.Models.Publications
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="box">
+<h2>Usuwanie</h2>
+<p>Czy napewno chcesz usunąć?</p>
+    <div class="line"></div>
+    <dl>
+        <dt>Data dodania</dt>
+        <dd><p>@Model.DateAdded.ToString("dd.MM.yyyy")</p></dd>
+        <dt>Autorzy</dt>
+        <dd><p>@Html.DisplayFor(model => model.Authors)</p></dd>
+        <dt>Nazwa</dt>
+        <dd><p>@Html.DisplayFor(model => model.Name)</p></dd>
+    </dl>
+    
+    <div class="line"></div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-outline-dark back-button">Anuluj</a>
+    </form>
+</div>

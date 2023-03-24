@@ -1,0 +1,164 @@
+﻿@model GEST.ViewModels.HomePageModel
+@{
+    ViewData["Title"] = "GEST";
+
+}
+<style>
+    header {
+        background-color: #E1ECD4;
+        box-shadow: none;
+    }
+</style>
+
+<!--Hero-->
+<div style="background: #E1ECD4;">
+    <div class="content-wrapper hero-container ">
+        <div class="hero-desc">
+            <h1 class="editable" id="heroHeader">@Html.DisplayFor(model => model.HomePage.HeroHeader)</h1>
+            <p class="editable" id="heroP">
+                @Html.DisplayFor(model => model.HomePage.HeroP)
+            </p>
+            <button class="button btn-1">@((ViewBag.lang == "pl") ? "O nas" : "About us")</button>
+            <button class="button btn-2">@((ViewBag.lang == "pl") ? "Dołącz" : "Join us")</button>
+
+        </div>
+        <img class="hero-vector" src="img/heroVector.svg" alt="" />
+    </div>
+</div>
+
+<!--Projekty-->
+<div class="content-wrapper row">
+    <div class="col col-md-6" style="text-align: center;">
+        <h1 class="section-header editable" id="projectHeader">@Html.DisplayFor(model => model.HomePage.ProjectHeader)</h1>
+        @foreach (var item in Model.Projects)
+        {
+            if (item.DisplayOnHomePage == true)
+            {
+                <a asp-controller="Projects" asp-action="Details" asp-route-id="@item.Id">
+                    <div class="card">
+                        <h2>
+                            @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Title) : @Html.DisplayFor(modelItem => item.Title_en))
+                        </h2>
+                        <p>
+                            @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.ShortDescription) : @Html.DisplayFor(modelItem => item.ShortDescription_en))
+                        </p>
+                        <p class="more-icon"><span class="material-symbols-outlined">read_more</span><p />
+                    </div>
+                </a>
+            }
+        }
+        <a asp-area="" asp-controller="Projects" asp-action="Index" class="button btn-3">@((string)ViewBag.lang == "en" ? "Read More" : "Więcej")</a>
+    </div>
+
+    <!--Aktualności-->
+    <div class="col col-md-6" style="text-align: center;">
+        <h1 class="section-header editable" id="newsHeader">@Html.DisplayFor(model => model.HomePage.NewsHeader)</h1>
+        @foreach (var item in Model.News.Take(Model.Projects.Count(p => p.DisplayOnHomePage)))
+        {
+            <a asp-controller="News" asp-action="Details" asp-route-id="@item.Id">
+                <div class="card">
+                    <h2>
+                        @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Title) : @Html.DisplayFor(modelItem => item.Title_en))
+                    </h2>
+                    <p class="card-date">@item.DatePublished.ToString("dd.MM.yyyy")</p>
+                    <p>
+                        @((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.ShortDescription) : @Html.DisplayFor(modelItem => item.ShortDescription_en))
+                    </p>
+                    <p class="more-icon"><span class="material-symbols-outlined">read_more</span><p />
+                </div>
+            </a>
+        }
+
+        <a asp-area="" asp-controller="News" asp-action="Index" class="button btn-3">@((string)ViewBag.lang == "en" ? "Read More" : "Więcej")</a>
+    </div>
+</div>
+
+<!--O nas-->
+<div class="about-us-container">
+    <div class="content-wrapper">
+        <h1 class="editable" id="aboutUsHeader">@Html.DisplayFor(model => model.HomePage.AboutUsHeader)</h1>
+        <p class="editable" id="aboutUsP">@Html.DisplayFor(model => model.HomePage.AboutUsP)</p>
+    </div>
+</div>
+
+<!--Osiągnięcia-->
+<div class="content-wrapper row">
+    <div class="col col-md-6">
+        <h1 class="section-header editable" id="achievementsHeader">@Html.DisplayFor(model => model.HomePage.AchievementsHeader)</h1>
+        @foreach (var item in Model.Achievements.Take(3))
+        {
+            <a asp-controller="Achievements" asp-action="Details" asp-route-id="@item.Id">
+                <div class="publication-card pb-card-hover">
+                    <span class="circle-icon material-symbols-outlined">military_tech</span>
+                    <div>
+                        <p class="publication-header">@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(ModelItem => item.Title) : @Html.DisplayFor(ModelItem => item.Title_en))</p>
+                    </div>
+                </div>
+            </a>
+        }
+        <div style="text-align: center">
+            <a asp-area="" asp-controller="Achievements" asp-action="Index" class="button btn-3">@((string)ViewBag.lang == "en" ? "Read More" : "Więcej")</a>
+        </div>
+
+    </div>
+
+    <!--Publikacje-->
+    <div class="col col-md-6">
+        <h1 class="section-header editable" id="publicationsHeader">@Html.DisplayFor(model => model.HomePage.PublicationsHeader)</h1>
+
+        @foreach (var item in Model.Publications.Take(3))
+        {
+            <div class="publication-card">
+                <span class=" circle-icon material-symbols-outlined">
+                    article
+                </span>
+                <div>
+                    <p class="publication-header">@Html.DisplayFor(loopitem => item.Authors)</p>
+                    <p>@Html.DisplayFor(loopitem => item.Name)</p>
+                </div>
+            </div>
+        }
+        <div style="text-align: center">
+            <a asp-area="" asp-controller="Publications" asp-action="Index" class="button btn-3">@((string)ViewBag.lang == "en" ? "Read More" : "Więcej")</a>
+        </div>
+    </div>
+</div>
+
+<!--Dołącz do nas-->
+<div class="join-us-container">
+    <div class="content-wrapper">
+        <p class="joinHeader editable" id="joinUsHeader">@Html.DisplayFor(model => model.HomePage.JoinUsHeader)</p>
+        <div class="joinContent">
+            <p class="editable" id="joinUsP">@Html.DisplayFor(model => model.HomePage.JoinUsP)</p>
+            <div style="display: flex;">
+                <span class="material-symbols-outlined">
+                    mail
+                </span> <p class="editable" id="email" style="margin-left: 7px;">@Html.DisplayFor(model => model.HomePage.Email)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Zarząd-->
+<h1 class="section-header" id="managementHeader">@Html.DisplayFor(model => model.HomePage.ManagementHeader)</h1>
+<div class="management-container content-wrapper">
+    @foreach (var item in Model.Management.Take(3))
+    {
+        <div class="management-card">
+            <span class="circle-icon material-symbols-outlined">person</span>
+            <h3>@Html.DisplayFor(modelItem => item.Name) @Html.DisplayFor(modelItem => item.SureName)</h3>
+            <h4>@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Title) : @Html.DisplayFor(modelItem => item.Title_en))</h4>
+            <p>@((string)ViewBag.lang == "pl" ? @Html.DisplayFor(modelItem => item.Description) : @Html.DisplayFor(modelItem => item.Description_en))</p>
+            <div>
+                @if (!string.IsNullOrEmpty(item.Email))
+                {
+                    <div class="contact-box" id="contact-box-mail-@item.Id"><span class="contact-icon material-symbols-outlined" id="contact-icon-mail-@item.Id">mail</span><p class="contact-mail" id="contact-mail-@item.Id">@item.Email</p></div>
+                }
+                @if (!string.IsNullOrEmpty(item.Phone))
+                {
+                    <div class="contact-box" id="contact-box-phone-@item.Id"><span class="contact-icon material-symbols-outlined" id="contact-icon-phone-@item.Id">phone_enabled</span> <p class="contact-phone" id="contact-phone-@item.Id">@Html.DisplayFor(modelItem => item.Phone)</p></div>
+                }
+            </div>
+        </div>
+    }
+</div>

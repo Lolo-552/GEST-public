@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GEST</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" type="text/css" href="~/lib/dataTables/datatables.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/GEST.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/admin-panel.css" asp-append-version="true" />
+
+
+</head>
+
+<body>
+    <!--Wykorzystano: https://codepen.io/creatdate/pen/XWZLBav-->
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>GEST Administrator</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Preview">Strona główna</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="News" asp-action="Index">Aktualności</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Projects" asp-action="Index">Projekty</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Managements" asp-action="Index">Zarząd</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Publications" asp-action="Index">Publikacje</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Achievements" asp-action="Index">Osiągnięcia</a>
+                </li>   
+                <li>
+                    <a asp-area="Admin" asp-controller="Pages" asp-action="Index">Zakładka więcej</a>
+                </li>
+                <li>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Account">Ustawienia konta</a>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+
+                <li><a asp-area="" asp-controller="Home" asp-action="Index" target="_blank" class="article">Otwórz GEST w nowej karcie</a></li>
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div class="container-sm" id="content">
+
+            <nav class="navbar">
+                    <div>
+                        <button type="button" id="sidebarCollapse" class="navbar-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                     <form asp-controller="Login" asp-action="Logout">
+                     <button type="submit" class="btn btn-primary">Wyloguj</button>                     
+                     </form>
+            </nav>
+            
+            @RenderBody()
+
+                
+
+            
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/js/admin-panel.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1//tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="/lib/tinymce/tinyconfig.js" referrerpolicy="origin"></script>
+    <script src="/lib/dataTables/dataTables.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+</body>
+</html>

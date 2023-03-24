@@ -1,0 +1,44 @@
+﻿@model GEST.Models.Management
+
+@{
+    ViewData["Title"] = "Zarząd - Usuwanie";
+}
+
+<div class="box">
+    <h2>Usuwanie</h2>
+    <p>Czy napewno chcesz usunąć?</p>
+    <div class="line"></div>
+    <dl>
+        <dt class="col-sm-2">
+            Imię
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Nazwisko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SureName)
+        </dd>
+        <dt class="col-sm-2">
+            Stanowsiko
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Opis
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+        <div class="line"></div> 
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Usuń" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-outline-dark back-button">Anuluj</a>
+    </form>
+</div>
