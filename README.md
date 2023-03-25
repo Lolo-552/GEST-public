@@ -25,7 +25,7 @@ hasło: admin
 - Walidacja formularzy
 - Można edytować większość tekstów (nagłówków, paragrafów) na stronie głównej w podglądzie strony w iframe
 - Panel admina ma zaimplementowany edytor wiswig TinyMCE, dzięki czemu dodawane artykuły mogą zawierać tagi html
-- Strona posiada również angielską wersję językową. Tłumaczenie nie jest generowane automatycznie, wszystkie przetłumaczone treści pobierane są z bazy danych. W celu szybszego i łatwiejszego tłumaczenia tekstu zaimplementowałem przycisk tłumacz automatycznie w formularzu dodawania artykułu. Klikając w niego treść umieszczona w polskiej wersji językowej jest tłumaczona przy użyciu Google Translate API i umieszczona w polu obok przeznaczonym dla angielskiej wersji strony. Admin może ręcznie poprawić wygenerowane tłumaczenie.
+- Strona posiada również angielską wersję językową. Strona nie jest tłumaczona automatycznie, wszystkie przetłumaczone treści pobierane są z bazy danych. W celu szybszego i łatwiejszego tłumaczenia tekstu zaimplementowałem przycisk tłumacz automatycznie w formularzu dodawania artykułu. Klikając w niego treść umieszczona w polskiej wersji językowej jest tłumaczona przy użyciu Google Translate API i umieszczona w polu obok przeznaczonym dla angielskiej wersji strony. Admin może ręcznie poprawić wygenerowane tłumaczenie.
 
 ## Strona główna
 ![image](https://user-images.githubusercontent.com/80482388/227707870-a1f0e3a5-b4b5-4522-ad05-5d4d655f9d3e.png)
