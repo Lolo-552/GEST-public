@@ -10,7 +10,7 @@ login: admin
 hasło: admin  
 
 ## Wykorzystane technologie
-- C# MVC
+- C# .NET MVC
 - jQuery
 - Bootstrap 5
 - HTML/CSS
