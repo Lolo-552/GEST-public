@@ -4,7 +4,7 @@ Jest to strona, którą stworzyłem na potrzeby koła naukowego GEST Politechnik
 Demonstracyjną wersje strony opublikowałem na platformie azure. Dostępna jest pod linkiem:  
 [gestdemo.azurewebsites.net](https://gestdemo.azurewebsites.net/)  
 Panel admina dostępny jest pod linkiem:  
-[gestdemo.azurewebsites.net/admin](https://gestdemo.azurewebsites.net/admin)  
+[gestdemo.azurewebsites.net/admin](https://gestdemo.azurewebsites.net/admin) 
 ***Dane do logowania:***  
 login: admin  
 hasło: admin  
